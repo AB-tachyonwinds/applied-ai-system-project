@@ -11,7 +11,7 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
+My version is a simple recommender that evaluates a user's taste and scores it based on similarity. My recommender puts heavy emphasis on the genre and mood of the songs, as well as the energy and acousticness.
 
 ---
 
