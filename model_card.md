@@ -1,111 +1,57 @@
 # 🎧 Model Card: Music Recommender Simulation
 
 ## 1. Model Name  
-
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+VibeSeeker 1.0
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+The user is assumed to have one favorite genre and one favorite mood. They also must have an opinion on the energy level of the song they're looking for and a general opinion on if they want the song to have acoustics. This model is moreso for classroom exploration. 
 
 ---
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+The model primarily uses genre, energy, mood, and acousticnesss to score the songs. This matches with what the user can set their preferences as. The model will compare the user's preferences with the song's attributes, checking how close they are. Once it is determined how close it is, the model will produce a score and then give the user the songs with the best scores.
 
 ---
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+There are 20 songs in the song list with a variety of different values: genre, mood, energy, tempo_bpm, valence,danceability, and acousticness. Genre, mood, energy, and acousticness are the values used in the current model, as the other values are not implemented.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+Any matches for genre and mood is generally accurate. Energy also has a decent sway on the variability of songs given. I think users who have a genre and mood that match the energy are often given the most consistent results.
 
 ---
 
 ## 6. Limitations and Bias 
 
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+The genre match is all or nothing in the current implementation, so similar genres are not scored positively at all. The User Profile is also very limited in its current state, where it can only have one favorite genre, mood, or energy. This is not accurate to many real users, who have varied tastes. As a result, the recommender can only profile a single taste of a user.
 
 ---
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
+We checked for a user that had negative energy values, when their genre/mood just outright doesn't exist in the song list, when their profile is blank in specific areas, or when there is a case mismatch in their profile (uppercase). I wanted to see what songs would be returned and we were looking for recommendations that would correspond properly to the user (negative energy values means returning a low energy song). 
 
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
+Most of the options returned reasonable recommendations. For profiles missing information or with genres/moods that don't exist, it makes sense that the songs returned would be following values that do exist (like energy and if the user likes acoustics). While this heavily simplifies the songs returned, it makes sense why these would be recommended. For case mismatch, this one is just trying to catch a  issue with the profile's format like if it's all uppercase letters, so what is returned is what is expected of the genre/mood listed in the profile. The negative energy value did have a strange song for the first option as the song was so fast that it actually removed similarity points despite ranking very high in genre and mood.
 
 ---
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+In the future, I would want more flexible for the users. This means they can have multiple genres that they like or multiple moods that they're searching for. I would also want to add more categories to the songs.
 
 ---
 
 ## 9. Personal Reflection  
 
-A few sentences about your experience.  
 
-Prompts:  
+I thought it was interesting how intricate recommender systems are and how reliant it can be on user data. Additionally, how difficult values (such as danceability) are assigned internally to songs is also fascinating. It taught me better ways to navigate my music recommendation apps, so that I might find songs that suit me better than what is currently shown.
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+My biggest learning moment was definitely during Phase 1 with Understanding the Problem. While I vaguely knew about how algorithms worked, I didn't actually know how engineers put it into practice. Using AI tools helped me determine reasonable scoring guidelines and also recommended me how to display information well in Python. I only really had to double-check the AI during the testing phases, where those were based more around human intuition than solid numbers. I was surprised about how accurate simple agorithms can be, even when lacking information but this also depended on the fact that the values given to the songs are concrete. Still, it was an interesting practice. I would like to add more options for the songs and try out more moods. While my test cases were usable, some tests felt like they were testing code rather than variable user data.

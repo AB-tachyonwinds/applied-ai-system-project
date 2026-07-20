@@ -108,25 +108,183 @@ Loading songs from data/songs.csv...
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+We ran the profile with various different types of users in order to stress test the recommender. We had a user that tested when they had negative energy values, when their test just outright doesn't exist in the song list, when the profile is blank in specific areas, or when there is a uppercase mismatch. The below is the output of the first iteration of the model with these user edge cases.
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+```
+============================================================
+               NONEXISTENT TASTE (EDGE CASE)                
+============================================================
+
+1. Velvet Hours - Simone Delacroix
+   Score: 1.90
+   Reasons:
+     - Energy similarity contributed 1.90 points
+
+2. Uptown Static - Simone Delacroix
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+3. Midnight Coding - LoRoom
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+4. Focus Flow - LoRoom
+   Score: 1.80
+   Reasons:
+     - Energy similarity contributed 1.80 points
+
+5. Coffee Shop Stories - Slow Stereo
+   Score: 1.74
+   Reasons:
+     - Energy similarity contributed 1.74 points
+
+============================================================
+
+
+============================================================
+                NEGATIVE ENERGY (EDGE CASE)                 
+============================================================
+
+1. Storm Runner - Voltline
+   Score: 2.18
+   Reasons:
+     - Genre matches favorite genre (rock)
+     - Mood matches favorite mood (intense)
+     - Energy similarity contributed -0.82 points
+
+2. Moonlit Sonata Redux - Elias Vance
+   Score: 0.50
+   Reasons:
+     - Energy similarity contributed 0.50 points
+
+3. Spacewalk Thoughts - Orbit Bloom
+   Score: 0.44
+   Reasons:
+     - Energy similarity contributed 0.44 points
+
+4. Autumn Letters - Wren & Oak
+   Score: 0.40
+   Reasons:
+     - Energy similarity contributed 0.40 points
+
+5. Front Porch Sundown - Wren & Oak
+   Score: 0.34
+   Reasons:
+     - Energy similarity contributed 0.34 points
+
+============================================================
+
+
+============================================================
+            ACOUSTIC BOUNDARY == 0.6 (EDGE CASE)            
+============================================================
+
+1. Front Porch Sundown - Wren & Oak
+   Score: 3.96
+   Reasons:
+     - Genre matches favorite genre (folk)
+     - Energy similarity contributed 1.46 points
+     - Acoustic bonus applied (user likes acoustic and song is acoustic)
+
+2. Autumn Letters - Wren & Oak
+   Score: 3.90
+   Reasons:
+     - Genre matches favorite genre (folk)
+     - Energy similarity contributed 1.40 points
+     - Acoustic bonus applied (user likes acoustic and song is acoustic)
+
+3. Velvet Hours - Simone Delacroix
+   Score: 2.20
+   Reasons:
+     - Energy similarity contributed 1.70 points
+     - Acoustic bonus applied (user likes acoustic and song is acoustic)
+
+4. Midnight Coding - LoRoom
+   Score: 2.14
+   Reasons:
+     - Energy similarity contributed 1.64 points
+     - Acoustic bonus applied (user likes acoustic and song is acoustic)
+
+5. Focus Flow - LoRoom
+   Score: 2.10
+   Reasons:
+     - Energy similarity contributed 1.60 points
+     - Acoustic bonus applied (user likes acoustic and song is acoustic)
+
+============================================================
+
+
+============================================================
+                BLANK GENRE/MOOD (EDGE CASE)                
+============================================================
+
+1. Velvet Hours - Simone Delacroix
+   Score: 1.90
+   Reasons:
+     - Energy similarity contributed 1.90 points
+
+2. Uptown Static - Simone Delacroix
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+3. Midnight Coding - LoRoom
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+4. Focus Flow - LoRoom
+   Score: 1.80
+   Reasons:
+     - Energy similarity contributed 1.80 points
+
+5. Coffee Shop Stories - Slow Stereo
+   Score: 1.74
+   Reasons:
+     - Energy similarity contributed 1.74 points
+
+============================================================
+
+
+============================================================
+            CASE MISMATCH POP/HAPPY (EDGE CASE)             
+============================================================
+
+1. Sunrise City - Neon Echo
+   Score: 1.96
+   Reasons:
+     - Energy similarity contributed 1.96 points
+
+2. Rooftop Lights - Indigo Parade
+   Score: 1.92
+   Reasons:
+     - Energy similarity contributed 1.92 points
+
+3. Carnival Nights - Rio Solano
+   Score: 1.90
+   Reasons:
+     - Energy similarity contributed 1.90 points
+
+4. Night Drive Loop - Neon Echo
+   Score: 1.90
+   Reasons:
+     - Energy similarity contributed 1.90 points
+
+5. Ashes We Carry - Grim Ferrous
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+============================================================
+```
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+It heavily favors genre and mood, and the flexibility of the profiles is quite limited with the amount of attributes currently.
 
 ---
 
@@ -136,10 +294,8 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+It's no wonder that for some engineers, their only job is to work with the algorithm. By using data and assigning it a value, songs can be matched up to users' preferences and internal values. Every action or preference made by the user can be used in the predictions. There are biases that can occur, such as feedback loops where a popular song keeps getting recommended so it's the only song being recommended. Songs with less information (like if the genre of a song is undetermined or simply not as popular) can also be unfairly reduced by the algorithm, even if it suits the user's preference much better than popular songs. I thought it was interesting putting it into practice for this project.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
-
+I put my reflection on the engineering process in model_card.md.
 
 
