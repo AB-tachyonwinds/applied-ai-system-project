@@ -17,7 +17,13 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Streaming platformers often use multiple different techniques to find songs that a user will like. It can analyze the song's metadata and compare how similar it is to other songs. It can also compare what other similar users listen to. In our system, we will prioritize the numerical distance (decided internally) of the song's attributes, like energy or mood. Each Song uses genre, mood, energy, tempo, valence, dancability, and acousticness. The UserProfile stores favorite genre, mood, targeted energy, and whether or not they like acoustic. The recommender will compare the values with the user's profile. We will choose which songs to recommend with recommend_songs() which will score and sort the songs, then returning the most similar ones.
+Streaming platformers often use multiple different techniques to find songs that a user will like. It can analyze the song's metadata and compare how similar it is to other songs. It can also compare what other similar users listen to. In our system, we will prioritize the numerical distance (decided internally) of the song's attributes, like energy or mood. 
+
+Each Song uses genre, mood, energy, tempo, valence, dancability, and acousticness. The UserProfile stores favorite genre, mood, targeted energy, and whether or not they like acoustic. We will use a taste profile as a base of comparison, which may be a bit narrow. The recommender will compare the values with the user's profile. 
+
+Every specific match in our algorithm recipe will yield different points. Genre match will yield +2.0 points if it's an exact match. Mood match will yield +1.0 points if it's an exact match. Energy similarity can yield up to +2.0 points. There can also be an acoustic bonus of +0.5 if the song matches the user's preference. There may be an overreliance on genre as a deciding factor and it might be possible to add more variables to the user profile, but we can keep it simple for now.
+
+We will choose which songs to recommend with recommend_songs() which will score and sort the songs, then returning the most similar ones.
 
 ---
 

@@ -9,3 +9,13 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Concrete Bloom,Kilo Rhymes,hip-hop,confident,0.68,94,0.62,0.85,0.15
+12,Autumn Letters,Wren & Oak,folk,nostalgic,0.30,86,0.45,0.38,0.88
+13,Iron Cathedral,Grim Ferrous,metal,aggressive,0.97,168,0.22,0.44,0.03
+14,Velvet Hours,Simone Delacroix,R&B,romantic,0.45,68,0.70,0.55,0.62
+15,Moonlit Sonata Redux,Elias Vance,classical,melancholic,0.25,66,0.30,0.20,0.95
+16,Carnival Nights,Rio Solano,latin,euphoric,0.85,128,0.88,0.91,0.20
+17,Neon Pulse Overdrive,Kilo Rhymes,electronic,triumphant,0.89,140,0.80,0.87,0.08
+18,Ashes We Carry,Grim Ferrous,metal,sorrowful,0.72,100,0.18,0.35,0.12
+19,Front Porch Sundown,Wren & Oak,folk,peaceful,0.33,80,0.68,0.42,0.90
+20,Uptown Static,Simone Delacroix,R&B,sensual,0.58,96,0.64,0.78,0.30
