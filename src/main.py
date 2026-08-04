@@ -9,7 +9,10 @@ You will implement the functions in recommender.py:
 - recommend_songs
 """
 
+import os
+
 from recommender import load_songs, recommend_songs
+from generator import generate_recommendation_summary
 
 
 # ---------------------------------------------------------------------------
@@ -101,7 +104,9 @@ PROFILES = {
 }
 
 
-def print_recommendations(label: str, user_prefs: dict, songs, k: int = 5) -> None:
+def print_recommendations(
+    label: str, user_prefs: dict, songs, k: int = 5, use_rag: bool = False
+) -> None:
     recommendations = recommend_songs(user_prefs, songs, k=k)
 
     print("\n" + "=" * 60)
@@ -117,14 +122,27 @@ def print_recommendations(label: str, user_prefs: dict, songs, k: int = 5) -> No
             for reason in reasons:
                 print(f"     - {reason}")
 
+    if use_rag:
+        print("\n--- AI Summary (grounded in the songs retrieved above) ---")
+        try:
+            summary = generate_recommendation_summary(user_prefs, recommendations)
+            print(summary)
+        except RuntimeError as exc:
+            print(f"[Skipped: {exc}]")
+
     print("\n" + "=" * 60 + "\n")
 
 
 def main() -> None:
     songs = load_songs("data/songs.csv")
 
+    # Set RAG_SUMMARY=1 to also call the LLM and print a grounded natural-
+    # language recommendation for each profile. Off by default so running
+    # the CLI/tests never requires an API key.
+    use_rag = os.environ.get("RAG_SUMMARY") == "1"
+
     for label, user_prefs in PROFILES.items():
-        print_recommendations(label, user_prefs, songs, k=5)
+        print_recommendations(label, user_prefs, songs, k=5, use_rag=use_rag)
 
 
 if __name__ == "__main__":

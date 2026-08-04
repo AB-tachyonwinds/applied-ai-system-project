@@ -1,0 +1,21 @@
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
+1,Paper Boats,Wren & Oak,folk,peaceful,0.31,74,0.64,0.40,0.87
+2,Downtown Sparkle,Neon Echo,pop,happy,0.80,120,0.86,0.81,0.16
+3,Late Bus Home,LoRoom,lofi,relaxed,0.38,76,0.58,0.55,0.80
+4,Skyline Pulse,Kilo Rhymes,hip-hop,confident,0.71,96,0.65,0.87,0.12
+5,Marble Halls,Elias Vance,classical,melancholic,0.22,60,0.28,0.18,0.96
+6,Salsa Sundown,Rio Solano,latin,euphoric,0.88,132,0.90,0.93,0.18
+7,Whispering Pines,Paper Lanterns,lofi,chill,0.33,70,0.62,0.50,0.89
+8,Electric Bloom,Orbit Bloom,ambient,dreamy,0.30,62,0.60,0.44,0.90
+9,Velvet Static,Simone Delacroix,R&B,sensual,0.55,94,0.66,0.76,0.32
+10,Crimson Anvil,Grim Ferrous,metal,aggressive,0.95,166,0.20,0.46,0.04
+11,Golden Hour Drift,Indigo Parade,indie pop,happy,0.74,122,0.79,0.80,0.38
+12,Runner's High,Max Pulse,pop,intense,0.90,130,0.75,0.85,0.06
+13,Autumn Static,Wren & Oak,folk,nostalgic,0.29,84,0.47,0.36,0.85
+14,Overdrive Nights,Kilo Rhymes,electronic,triumphant,0.87,138,0.78,0.86,0.09
+15,Soft Rain Study,LoRoom,lofi,focused,0.36,78,0.57,0.58,0.79
+16,Neon Ashes,Neon Echo,synthwave,moody,0.73,108,0.47,0.71,0.24
+17,Cathedral Static,Elias Vance,classical,solemn,0.20,58,0.25,0.15,0.97
+18,Wildfire Waltz,Rio Solano,latin,joyful,0.83,126,0.86,0.89,0.22
+19,Broken Compass,Simone Delacroix,R&B,romantic,0.47,70,0.68,0.57,0.60
+20,Last Light Vigil,Grim Ferrous,metal,sorrowful,0.70,98,0.19,0.33,0.14

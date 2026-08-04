@@ -1,0 +1,21 @@
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
+1,Thunder Road,Iron Harbor,rock,intense,0.89,150,0.55,0.72,0.09
+2,Steel Skyline,Voltline,rock,empowered,0.92,145,0.58,0.68,0.12
+3,Rebel Anthem,Wildfire,rock,confident,0.87,138,0.61,0.75,0.10
+4,Midnight Riot,Neon Cross,rock,moody,0.81,142,0.49,0.70,0.15
+5,Stone Garden,Ever Ash,rock,reflective,0.68,126,0.47,0.62,0.25
+6,Crash and Burn,Grim Ferrous,metal,aggressive,0.96,170,0.21,0.48,0.05
+7,Highway Echo,Neon Cross,rock,energetic,0.84,148,0.63,0.80,0.10
+8,Shattered Crown,Iron Harbor,rock,angry,0.91,154,0.38,0.69,0.07
+9,Embers Fade,Wildfire,rock,sad,0.72,118,0.36,0.58,0.20
+10,Night Siege,Voltline,rock,intense,0.88,152,0.52,0.71,0.11
+11,Velvet Hammer,Shadow Pulse,rock,brooding,0.76,132,0.45,0.65,0.18
+12,Into the Flame,Grim Ferrous,metal,fierce,0.94,164,0.24,0.50,0.06
+13,Siren of the Streets,Ever Ash,rock,melancholic,0.70,120,0.41,0.60,0.22
+14,Rolling Ashes,Neon Cross,rock,rebellious,0.86,140,0.57,0.77,0.09
+15,Afterglow Drive,Voltline,rock,hopeful,0.79,130,0.68,0.74,0.14
+16,Alien Anthem,Wildfire,rock,otherworldly,0.85,136,0.51,0.73,0.13
+17,Rust and Roses,Shadow Pulse,rock,nostalgic,0.66,110,0.44,0.56,0.28
+18,Metal Hearts,Iron Harbor,metal,passionate,0.95,168,0.30,0.55,0.08
+19,Desert Storm,Ever Ash,rock,adventurous,0.83,134,0.62,0.72,0.16
+20,Final Stand,Neon Cross,rock,triumphant,0.90,158,0.66,0.79,0.11

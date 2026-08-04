@@ -1,7 +1,7 @@
-# 🎧 Model Card: Music Recommender Simulation
+# 🎧 Model Card: Music Recommender and Summarizer Simulation
 
 ## 1. Model Name  
-VibeSeeker 1.0
+VibeSeeker 2.0
 
 ---
 
