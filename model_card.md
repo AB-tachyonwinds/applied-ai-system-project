@@ -19,13 +19,15 @@ The model primarily uses genre, energy, mood, and acousticnesss to score the son
 
 ## 4. Data  
 
-There are 3 env files in the song list with a variety of different values: genre, mood, energy, tempo_bpm, valence,danceability, and acousticness. Genre, mood, energy, and acousticness are the values used in the current model, as the other values are not implemented.
+There are 3 csv files in the song list with a variety of different values: genre, mood, energy, tempo_bpm, valence, danceability, and acousticness. Genre, mood, energy, and acousticness are the values used in the current model, as the other values are not implemented.
 
 ---
 
 ## 5. Strengths  
 
 Any exact matches for genre and mood is generally accurate, as it has the strongest correlation. Energy also has a decent sway on the variability of songs given. I think users who have a genre and mood that match the energy are often given the most consistent results.
+
+The summary provides a reasonable explanation for why one song is used over another and also identifies any gaps in the taste profile.
 
 ---
 

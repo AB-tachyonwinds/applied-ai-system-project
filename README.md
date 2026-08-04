@@ -2,23 +2,19 @@
 
 ## Project Summary
 
-My original project was Module 3: Show Music Recommender Simulation. Its main purpose is to represent songs and a user "taste profile" as data and gives the user a recommendation score.
+My original project was Module 3: Show Music Recommender Simulation. Its main purpose is to represent songs and a user "taste profile" as data. It will score the songs according to the user's taste profile, and return recommended songs.
 
-
+To extend the original, this project will have an AI summary that explains the song choices. This AI summary can detect gaps in the taste profile, like when the genre is not set or not found in any of songs. The application will only use the songs listed in the data folder.
 
 ---
 
 ## Architecture Overview
 
-Streaming platformers often use multiple different techniques to find songs that a user will like. It can analyze the song's metadata and compare how similar it is to other songs. It can also compare what other similar users listen to. In our system, we will prioritize the numerical distance (decided internally) of the song's attributes, like energy or mood. We will also implement a summary of the songs and why they were chosen.
+Streaming platformers often use multiple different techniques to find songs that a user will like. It can analyze the song's metadata and compare how similar it is to other songs. In our system, we will prioritize the numerical distance (decided internally) of the song's attributes, like energy or mood. We will also implement a summary that explains why the songs were chosen.
 
-Each Song uses genre, mood, energy, tempo, valence, dancability, and acousticness. The UserProfile stores favorite genre, mood, targeted energy, and whether or not they like acoustic. We will use a taste profile as a base of comparison, which may be a bit narrow. The recommender will compare the values with the user's profile. 
+![System Diagram](diagrams/system_diagram.mmd)
 
-Every specific match in our algorithm recipe will yield different points. Genre match will yield +2.0 points if it's an exact match. Mood match will yield +1.0 points if it's an exact match. Energy similarity can yield up to +2.0 points. There can also be an acoustic bonus of +0.5 if the song matches the user's preference. There may be an overreliance on genre as a deciding factor and it might be possible to add more variables to the user profile, but this process is simplified for now.
-
-We will choose which songs to recommend with recommend_songs() which will score and sort the songs, then returning the most similar ones.
-
-
+The diagram breaks the pipeline into four stages. **Input** is the song CSVs (`data/songs*.csv`) and the user's taste profile (favorite genre, mood, target energy, acoustic preference). **Processing** is a RAG-style flow: `load_songs()` parses the CSVs, the retriever (`score_song()` / `recommend_songs()` in `src/recommender.py`) scores and ranks songs against the profile, and the generator (`generate_recommendation_summary()` in `src/generator.py`) is the LLM agent that writes a natural-language summary grounded only in the retrieved songs. **Output** is the ranked list of songs with scores/reasons, plus that AI-written summary. **Human & Automated Checks** wraps the whole thing: pytest tests (`tests/test_recommender.py`, `tests/test_generator.py`, including mocked LLM calls) verify the loader/retriever/generator, grounding guardrails handle profile-gap detection and 429 retry/backoff, and a human reviews the printed reasons and AI summary via `src/main.py`'s console output.
 
 ---
 
@@ -203,23 +199,70 @@ If you're looking for intense rock tracks, "Night Siege" by Voltline and "Thunde
 
 ============================================================
 ```
+
+Missing Genre and Mood in User Profile:
+```
+============================================================
+                BLANK GENRE/MOOD (EDGE CASE)                
+============================================================
+
+1. Broken Compass - Simone Delacroix
+   Score: 1.94
+   Reasons:
+     - Energy similarity contributed 1.94 points
+
+2. Velvet Hours - Simone Delacroix
+   Score: 1.90
+   Reasons:
+     - Energy similarity contributed 1.90 points
+
+3. Velvet Static - Simone Delacroix
+   Score: 1.90
+   Reasons:
+     - Energy similarity contributed 1.90 points
+
+4. Uptown Static - Simone Delacroix
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+5. Midnight Coding - LoRoom
+   Score: 1.84
+   Reasons:
+     - Energy similarity contributed 1.84 points
+
+--- AI Summary (grounded in the songs retrieved above) ---
+Since none of the candidate songs matched a specific favorite genre or mood, these picks rely entirely on hitting your target energy level. "Broken Compass" by Simone Delacroix takes the top spot because its energy level is an almost exact match to your preference, giving it a slightly better fit than the runner-up, "Velvet Hours." Whilethese selections and others like "Velvet Static" capture your desired intensity well, keep in mind that they rely strictly on energy alignment rather than specific genreor mood matches.
+
+============================================================
+```
 ---
 
 ## Design Decisions
 
+I went with a simple numerical scoring function instead of embeddings or a vector database, mostly because the song data was already structured (genre, mood, energy, acousticness). This choice made `score_song()` easy to debug and implement, but it also means genre and mood matches are all-or-nothing. This means that even if the genre is close to another, it won't be considered in the scoring at all. This trade-off was made for simplicity sake, but also to limit the amount of tokens needed for implementation.
+
+For a similar reason, I decided to keep the LLM out of the actual song picking. `recommend_songs()` does all the ranking, and `generate_recommendation_summary()` only ever gets handed the songs that were already chosen — its job is to explain the results, not decide them. This felt important for trust and testability: I didn't want the summary to ever contradict or override the scoring logic, and it meant I could mock the LLM call in `tests/test_generator.py` and test the retrieval and generation pieces independently.
+
+Like the previous project iteration, I also limit the user profile to a single favorite genre, mood, and energy value, so a user is not able to pick multiple options. It simplified the scoring and the profile-gap detection, but it's too limiting and doesn't accurately portray a user's varied tastes.
 
 ---
 
 ## Testing Summary
 
-Testing for the AI summary is done through human evaluation, as many of the summaries are geared towards preference and "what feels right". The following w
+Testing for the AI summary is done through human evaluation, as many of the summaries are geared towards preference and "what feels right". The following inputs were tested for edge cases. The sample interactions and their specific profiles are located in assets/sample_interactions.txt. 
 
 | Test Input | Evaluation Criteria | Result |
 | --- | --- | --- |
 | Rock User Profile | AI summary accurate, Song choices accurate | Passed |
 | Parsing too many user profiles at once | When tokens run out, exit gracefully | Failed, not the most user friendly |
-| Profile with missing information | AI summary and song choices accurate | Passed |
+| Profile with genres/moods that don't exist | AI summary and song choices accurate | Passed |
 | Profile with negative energy | AI summary accurate, song reasons accurate | Passed |
+| Profile with missing genre and mood | AI summary and song choices accurate | Passed |
+
+I feel that even with missing information, the current AI summary does a decent job at summarizing the recommendations. It will note gaps in its judgement and relay that properly to the user.
+On the other hand, my attempts to add logging and catching errors was difficult and I ran into errors when I hit my rate limit. In general, my logging practices are a bit rusty, so doing this project helped me identify that skill gap.
+Overall, these tests helped pinpoint situations that I should look out for while using RAG for explanations and summaries.
 
 ---
 

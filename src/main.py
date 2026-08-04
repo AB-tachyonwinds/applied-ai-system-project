@@ -78,15 +78,15 @@ NEGATIVE_ENERGY = {
 #     "likes_acoustic": True,
 # }
 
-# # Empty/blank strings for genre and mood. If any song in the CSV has a blank
-# # genre or mood field (or load_songs doesn't strip whitespace), this could
-# # produce a false "match" and inflate a score for the wrong reason.
-# BLANK_PREFERENCES = {
-#     "favorite_genre": "",
-#     "favorite_mood": "",
-#     "target_energy": 0.5,
-#     "likes_acoustic": False,
-# }
+# Empty/blank strings for genre and mood. If any song in the CSV has a blank
+# genre or mood field (or load_songs doesn't strip whitespace), this could
+# produce a false "match" and inflate a score for the wrong reason.
+BLANK_PREFERENCES = {
+    "favorite_genre": "",
+    "favorite_mood": "",
+    "target_energy": 0.5,
+    "likes_acoustic": False,
+}
 
 # # Case-sensitivity trap: CSV genres/moods are typically lowercase, so
 # # "Pop"/"Happy" should NOT match "pop"/"happy" if score_song does a naive
@@ -101,11 +101,11 @@ NEGATIVE_ENERGY = {
 PROFILES = {
     #"High-Energy Pop": HIGH_ENERGY_POP,
     #"Chill Lofi": CHILL_LOFI,
-    "Deep Intense Rock": DEEP_INTENSE_ROCK,
+    # "Deep Intense Rock": DEEP_INTENSE_ROCK,
     #"Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
-    "Negative Energy (edge case)": NEGATIVE_ENERGY,
+    # "Negative Energy (edge case)": NEGATIVE_ENERGY,
     #"Acoustic Boundary == 0.6 (edge case)": ACOUSTIC_BOUNDARY_TESTER,
-    #"Blank Genre/Mood (edge case)": BLANK_PREFERENCES,
+    "Blank Genre/Mood (edge case)": BLANK_PREFERENCES,
     #"Case Mismatch Pop/Happy (edge case)": CASE_MISMATCH_TASTE,
 }
 
