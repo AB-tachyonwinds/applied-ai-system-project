@@ -61,12 +61,12 @@ NONEXISTENT_TASTE = {
     "likes_acoustic": False,
 }
 
-# NEGATIVE_ENERGY = {
-#     "favorite_genre": "rock",
-#     "favorite_mood": "intense",
-#     "target_energy": -0.5,
-#     "likes_acoustic": False,
-# }
+NEGATIVE_ENERGY = {
+    "favorite_genre": "rock",
+    "favorite_mood": "intense",
+    "target_energy": -0.5,
+    "likes_acoustic": False,
+}
 
 # # Acousticness threshold boundary: the bonus only applies when
 # # acousticness > 0.6 (strictly greater). A song with acousticness == 0.6
@@ -99,11 +99,11 @@ NONEXISTENT_TASTE = {
 # } 
 
 PROFILES = {
-    "High-Energy Pop": HIGH_ENERGY_POP,
+    #"High-Energy Pop": HIGH_ENERGY_POP,
     #"Chill Lofi": CHILL_LOFI,
-    #"Deep Intense Rock": DEEP_INTENSE_ROCK,
-    "Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
-    #"Negative Energy (edge case)": NEGATIVE_ENERGY,
+    "Deep Intense Rock": DEEP_INTENSE_ROCK,
+    #"Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
+    "Negative Energy (edge case)": NEGATIVE_ENERGY,
     #"Acoustic Boundary == 0.6 (edge case)": ACOUSTIC_BOUNDARY_TESTER,
     #"Blank Genre/Mood (edge case)": BLANK_PREFERENCES,
     #"Case Mismatch Pop/Happy (edge case)": CASE_MISMATCH_TASTE,
