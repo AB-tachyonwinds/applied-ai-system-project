@@ -37,7 +37,13 @@ We will choose which songs to recommend with recommend_songs() which will score 
 pip install -r requirements.txt
 ```
 
-3. Run the app:
+3. Create an environmental variable file that contains the following:
+   ```
+   GEMINI_API_KEY=[your-api-key]
+   RAG_SUMMARY=0
+   ```
+
+4. Run the app:
 
 ```bash
 python -m src.main

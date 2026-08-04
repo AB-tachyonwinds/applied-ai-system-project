@@ -25,19 +25,19 @@ load_dotenv()
 # Sample user preference profiles
 # ---------------------------------------------------------------------------
 
-HIGH_ENERGY_POP = {
-    "favorite_genre": "pop",
-    "favorite_mood": "happy",
-    "target_energy": 0.9,
-    "likes_acoustic": False,
-}
+# HIGH_ENERGY_POP = {
+#     "favorite_genre": "pop",
+#     "favorite_mood": "happy",
+#     "target_energy": 0.9,
+#     "likes_acoustic": False,
+# } 
 
 CHILL_LOFI = {
     "favorite_genre": "lofi",
     "favorite_mood": "calm",
     "target_energy": 0.2,
     "likes_acoustic": True,
-}
+} 
 
 DEEP_INTENSE_ROCK = {
     "favorite_genre": "rock",
@@ -54,12 +54,12 @@ DEEP_INTENSE_ROCK = {
 # score should come purely from the energy_similarity term (and possibly the
 # acoustic bonus) -- a good check that unmatched genre/mood don't silently
 # add points.
-# NONEXISTENT_TASTE = {
-#     "favorite_genre": "polka",
-#     "favorite_mood": "melancholic-but-danceable",
-#     "target_energy": 0.5,
-#     "likes_acoustic": False,
-# }
+NONEXISTENT_TASTE = {
+    "favorite_genre": "polka",
+    "favorite_mood": "melancholic-but-danceable",
+    "target_energy": 0.5,
+    "likes_acoustic": False,
+}
 
 # NEGATIVE_ENERGY = {
 #     "favorite_genre": "rock",
@@ -99,10 +99,10 @@ DEEP_INTENSE_ROCK = {
 # } 
 
 PROFILES = {
-    "High-Energy Pop": HIGH_ENERGY_POP,
+    # "High-Energy Pop": HIGH_ENERGY_POP,
     "Chill Lofi": CHILL_LOFI,
-    "Deep Intense Rock": DEEP_INTENSE_ROCK
-    #"Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
+    "Deep Intense Rock": DEEP_INTENSE_ROCK,
+    "Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
     #"Negative Energy (edge case)": NEGATIVE_ENERGY,
     #"Acoustic Boundary == 0.6 (edge case)": ACOUSTIC_BOUNDARY_TESTER,
     #"Blank Genre/Mood (edge case)": BLANK_PREFERENCES,
