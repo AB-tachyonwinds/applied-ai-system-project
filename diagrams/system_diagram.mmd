@@ -1,0 +1,39 @@
+%% System diagram for the Music Recommender Simulation (RAG-style pipeline)
+%% Retrieval: recommender.py  |  Generation: generator.py  |  Entry point: main.py
+%% Human/automated checks: pytest test suite + printed reasons/AI summary for manual review
+
+flowchart TD
+    subgraph Input["Input"]
+        CSV["Song data CSVs\n(data/songs*.csv)"]
+        PROFILE["User taste profile\n(favorite_genre, mood,\ntarget_energy, likes_acoustic)"]
+    end
+
+    subgraph Process["Processing"]
+        LOADER["load_songs()\nsrc/recommender.py\nparses CSVs into song dicts"]
+        RETRIEVER["Retriever: score_song() / recommend_songs()\nsrc/recommender.py\nscores + ranks top-k songs, returns reasons"]
+        GENERATOR["Generator (LLM agent): generate_recommendation_summary()\nsrc/generator.py\nGemini call grounded only in retrieved songs"]
+    end
+
+    subgraph Output["Output"]
+        RANKED["Ranked recommendations\n+ score + match reasons"]
+        SUMMARY["AI-written natural-language\nsummary (RAG output)"]
+    end
+
+    subgraph Checks["Human & Automated Checks"]
+        TESTS["Automated tests\ntests/test_recommender.py\ntests/test_generator.py\n(pytest, incl. mocked LLM calls)"]
+        HUMAN["Human review\nreads printed reasons + AI summary\nvia src/main.py console output"]
+        GUARD["Grounding guardrails\nprofile-gap detection, system prompt\nconstraints, 429 retry/backoff handling"]
+    end
+
+    CSV --> LOADER --> RETRIEVER
+    PROFILE --> RETRIEVER
+    RETRIEVER --> RANKED
+    RANKED --> GENERATOR
+    GENERATOR --> GUARD --> SUMMARY
+
+    RANKED --> HUMAN
+    SUMMARY --> HUMAN
+
+    TESTS -. verifies .-> LOADER
+    TESTS -. verifies .-> RETRIEVER
+    TESTS -. verifies .-> GENERATOR
