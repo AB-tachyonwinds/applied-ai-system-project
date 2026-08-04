@@ -14,12 +14,26 @@ USER_PREFS = {
 
 RECOMMENDATIONS = [
     (
-        {"id": 1, "title": "Test Pop Track", "artist": "Test Artist"},
+        {
+            "id": 1,
+            "title": "Test Pop Track",
+            "artist": "Test Artist",
+            "genre": "pop",
+            "mood": "happy",
+            "energy": 0.8,
+        },
         4.5,
         "Genre matches favorite genre (pop); Mood matches favorite mood (happy)",
     ),
     (
-        {"id": 2, "title": "Chill Lofi Loop", "artist": "Test Artist"},
+        {
+            "id": 2,
+            "title": "Chill Lofi Loop",
+            "artist": "Test Artist",
+            "genre": "lofi",
+            "mood": "calm",
+            "energy": 0.3,
+        },
         1.2,
         "Energy similarity contributed 1.20 points",
     ),

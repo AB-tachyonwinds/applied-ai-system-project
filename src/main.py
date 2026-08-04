@@ -25,12 +25,12 @@ load_dotenv()
 # Sample user preference profiles
 # ---------------------------------------------------------------------------
 
-# HIGH_ENERGY_POP = {
-#     "favorite_genre": "pop",
-#     "favorite_mood": "happy",
-#     "target_energy": 0.9,
-#     "likes_acoustic": False,
-# } 
+HIGH_ENERGY_POP = {
+    "favorite_genre": "pop",
+    "favorite_mood": "happy",
+    "target_energy": 0.9,
+    "likes_acoustic": False,
+} 
 
 CHILL_LOFI = {
     "favorite_genre": "lofi",
@@ -99,9 +99,9 @@ NONEXISTENT_TASTE = {
 # } 
 
 PROFILES = {
-    # "High-Energy Pop": HIGH_ENERGY_POP,
-    "Chill Lofi": CHILL_LOFI,
-    "Deep Intense Rock": DEEP_INTENSE_ROCK,
+    "High-Energy Pop": HIGH_ENERGY_POP,
+    #"Chill Lofi": CHILL_LOFI,
+    #"Deep Intense Rock": DEEP_INTENSE_ROCK,
     "Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
     #"Negative Energy (edge case)": NEGATIVE_ENERGY,
     #"Acoustic Boundary == 0.6 (edge case)": ACOUSTIC_BOUNDARY_TESTER,
