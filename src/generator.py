@@ -72,16 +72,21 @@ def generate_recommendation_summary(
         "Do not mention, invent, or suggest any song that is not in the list. "
         "Write 2-4 friendly sentences explaining why these songs suit the "
         "user's taste profile, referencing specific songs and their match "
-        "reasons."
+        "reasons. If none of the candidate songs can be honestly recommended "
+        "for this profile, reply exactly: "
+        "\"I do not have a good recommendation based on these songs.\""
     )
 
-    client = _get_client()
-    response = client.models.generate_content(
-        model=MODEL,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            system_instruction=system_prompt,
-            max_output_tokens=300,
-        ),
-    )
-    return response.text
+    try:
+        client = _get_client()
+        response = client.models.generate_content(
+            model=MODEL,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                max_output_tokens=300,
+            ),
+        )
+        return (response.text or "").strip()
+    except Exception as e:
+        return f"Unable to generate a recommendation summary. ({type(e).__name__}: {e})"
