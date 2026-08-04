@@ -42,6 +42,7 @@ pip install -r requirements.txt
    GEMINI_API_KEY=[your-api-key]
    RAG_SUMMARY=0
    ```
+   Set up your Gemini api-key (I used the free tier). IIf RAG_SUMMARY is 0, then it will run without RAG. If RAG_SUMMARY is any other number, then the RAG summary will be used.
 
 4. Run the app:
 
