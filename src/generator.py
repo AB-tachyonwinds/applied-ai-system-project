@@ -15,7 +15,7 @@ from typing import Dict, List, Tuple
 from google import genai
 from google.genai import types
 
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-flash-latest"
 
 _client = None
 
@@ -84,7 +84,7 @@ def generate_recommendation_summary(
             contents=prompt,
             config=types.GenerateContentConfig(
                 system_instruction=system_prompt,
-                max_output_tokens=300,
+                max_output_tokens=1024,
             ),
         )
         return (response.text or "").strip()

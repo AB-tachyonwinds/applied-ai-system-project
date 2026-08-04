@@ -11,8 +11,14 @@ You will implement the functions in recommender.py:
 
 import os
 
+from dotenv import load_dotenv
+
 from recommender import load_songs, recommend_songs
 from generator import generate_recommendation_summary
+
+# Load GEMINI_API_KEY (and any other config) from a .env file in the project
+# root, if one exists, so it doesn't have to be exported manually.
+load_dotenv()
 
 
 # ---------------------------------------------------------------------------
@@ -136,10 +142,10 @@ def print_recommendations(
 def main() -> None:
     songs = load_songs("data/songs.csv")
 
-    # Set RAG_SUMMARY=1 to also call the LLM and print a grounded natural-
-    # language recommendation for each profile. Off by default so running
-    # the CLI/tests never requires an API key.
-    use_rag = os.environ.get("RAG_SUMMARY") == "1"
+    # Also call the LLM and print a grounded natural-language recommendation
+    # for each profile. On by default; set RAG_SUMMARY=0 to skip it (e.g. for
+    # tests/CI that shouldn't require an API key).
+    use_rag = os.environ.get("RAG_SUMMARY") != "0"
 
     for label, user_prefs in PROFILES.items():
         print_recommendations(label, user_prefs, songs, k=5, use_rag=use_rag)
