@@ -7,7 +7,7 @@ VibeSeeker 2.0
 
 ## 2. Intended Use  
 
-The user is assumed to have one favorite genre and one favorite mood. They also must have an opinion on the energy level of the song they're looking for and a general opinion on if they want the song to have acoustics. This model is moreso for classroom exploration. 
+The user is assumed to have one favorite genre and one favorite mood. They also must have an opinion on the energy level of the song they're looking for and a general opinion on if they want the song to have acoustics. This model is moreso a proof of concept and currently not ready for production.
 
 ---
 

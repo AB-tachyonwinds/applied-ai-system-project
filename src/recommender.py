@@ -1,5 +1,5 @@
 import csv
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Union
 from dataclasses import dataclass
 
 @dataclass
@@ -39,18 +39,27 @@ class Recommender:
         # TODO: Implement explanation logic
         return "Explanation placeholder"
 
-def load_songs(csv_path: str) -> List[Dict]:
-    """Loads songs from a CSV file into a list of dicts with parsed numeric fields."""
-    print(f"Loading songs from {csv_path}...")
+def load_songs(csv_paths: Union[str, List[str]]) -> List[Dict]:
+    """Loads songs from one or more CSV files into a list of dicts with parsed
+    numeric fields.
+
+    Accepts either a single CSV path or a list of CSV paths. When multiple
+    paths are given, rows from all files are concatenated into one list.
+    """
+    if isinstance(csv_paths, str):
+        csv_paths = [csv_paths]
+
     float_fields = {"energy", "tempo_bpm", "valence", "danceability", "acousticness"}
     songs = []
-    with open(csv_path, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            for field in float_fields:
-                row[field] = float(row[field])
-            row["id"] = int(row["id"])
-            songs.append(row)
+    for csv_path in csv_paths:
+        print(f"Loading songs from {csv_path}...")
+        with open(csv_path, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                for field in float_fields:
+                    row[field] = float(row[field])
+                row["id"] = int(row["id"])
+                songs.append(row)
     return songs
 
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:

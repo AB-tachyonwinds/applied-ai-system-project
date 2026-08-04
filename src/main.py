@@ -140,7 +140,11 @@ def print_recommendations(
 
 
 def main() -> None:
-    songs = load_songs("data/songs.csv")
+    songs = load_songs([
+        "data/songs.csv",
+        "data/songs_roc.csv",
+        "data/songs_var.csv",
+    ])
 
     # Also call the LLM and print a grounded natural-language recommendation
     # for each profile. On by default; set RAG_SUMMARY=0 to skip it (e.g. for
