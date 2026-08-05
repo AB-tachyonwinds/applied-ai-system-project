@@ -71,12 +71,12 @@ NEGATIVE_ENERGY = {
 # # Acousticness threshold boundary: the bonus only applies when
 # # acousticness > 0.6 (strictly greater). A song with acousticness == 0.6
 # # exactly should NOT receive the bonus -- a classic off-by-one/boundary trap.
-# ACOUSTIC_BOUNDARY_TESTER = {
-#     "favorite_genre": "folk",
-#     "favorite_mood": "calm",
-#     "target_energy": 0.6,
-#     "likes_acoustic": True,
-# }
+ACOUSTIC_BOUNDARY_TESTER = {
+    "favorite_genre": "folk",
+    "favorite_mood": "calm",
+    "target_energy": 0.6,
+    "likes_acoustic": True,
+}
 
 # Empty/blank strings for genre and mood. If any song in the CSV has a blank
 # genre or mood field (or load_songs doesn't strip whitespace), this could
@@ -91,21 +91,22 @@ BLANK_PREFERENCES = {
 # # Case-sensitivity trap: CSV genres/moods are typically lowercase, so
 # # "Pop"/"Happy" should NOT match "pop"/"happy" if score_song does a naive
 # # `==` comparison. Checks whether matching is (or should be) case-insensitive.
-# CASE_MISMATCH_TASTE = {
-#     "favorite_genre": "Pop",
-#     "favorite_mood": "Happy",
-#     "target_energy": 0.8,
-#     "likes_acoustic": False,
-# } 
+CASE_MISMATCH_TASTE = {
+    "favorite_genre": "Pop",
+    "favorite_mood": "Happy",
+    "target_energy": 0.8,
+    "likes_acoustic": False,
+} 
 
+# Uncomment any profile that you would like to test!
 PROFILES = {
-    #"High-Energy Pop": HIGH_ENERGY_POP,
+    "High-Energy Pop": HIGH_ENERGY_POP,
     #"Chill Lofi": CHILL_LOFI,
     # "Deep Intense Rock": DEEP_INTENSE_ROCK,
     #"Nonexistent Taste (edge case)": NONEXISTENT_TASTE,
     # "Negative Energy (edge case)": NEGATIVE_ENERGY,
     #"Acoustic Boundary == 0.6 (edge case)": ACOUSTIC_BOUNDARY_TESTER,
-    "Blank Genre/Mood (edge case)": BLANK_PREFERENCES,
+    # "Blank Genre/Mood (edge case)": BLANK_PREFERENCES,
     #"Case Mismatch Pop/Happy (edge case)": CASE_MISMATCH_TASTE,
 }
 
